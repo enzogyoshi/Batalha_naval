@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batalha naval</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>BATALHA NAVAL</h1>
+    </header>
+    <section class="formzin">
+        <form id="form1" action="">
+            Nome: <input type="text" id="nome" placeholder="Insira seu nome"><br>
+            <div class="select-diff">
+                <p>dificuldade: </p>
+                <div>
+                    <input type="radio" id="dificil" name="vidas" value="3">
+                    <label for="vidas">dificil: 3 vidas</label>
+                </div>
+                <div>
+                    <input type="radio" id="medio" name="vidas" value="5">
+                    <label for="vidas">medio: 5 vidas</label>
+                </div>
+                <div>
+                    <input type="radio" id="facil" name="vidas" value="3">
+                    <label for="vidas">facil: 7 vidas</label>
+                </div>
+            </div>
+            <br>
+            <input class="btnstart" type="button" value="start" onclick="startGame()">
+        </form>
+    </section>
+
+    <section class="jogo">
+        <div id="board">
+            
+        </div>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>

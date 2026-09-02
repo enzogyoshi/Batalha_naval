@@ -1,0 +1,47 @@
+body{
+    background-color: bisque;
+}
+h1{
+    text-align: center;
+}
+.formzin{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    
+    }
+#form1{
+    background-color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 2%;
+    max-width: 50%;
+    width: 500px;
+}
+.select-diff{
+    text-align: start;
+    margin-left: 28%;
+}
+.btnstart{
+    background-color: rgb(71, 12, 12);
+    color: white;
+    border: none;
+    min-width: 90%;
+    padding: 2%;
+    border-radius: 10px;
+}
+.btnstart:hover{
+    background-color: rgb(121, 30, 30);
+    cursor: pointer;
+}
+
+#board{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    width: 400px;
+}
+
+.cell{
+    border: 1px solid black;
+    height: 40px;
+}
