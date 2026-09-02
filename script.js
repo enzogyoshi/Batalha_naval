@@ -32,5 +32,20 @@ console.log(matrizJogo)
 
 tabelaJogo.addEventListener('click', function(event){
     const clicado = event.target
-        console.log(clicado.dataset)
-            })
+    console.log(clicado.dataset)
+    const x = parseInt(clicado.dataset.x)
+    const y = parseInt(clicado.dataset.y)
+    if (verificarPos(x, y)) {
+        console.log("ACERTOU!")
+    } else{
+        console.log("Água...")
+    }
+})
+
+function verificarPos(x, y) {
+    if (matrizJogo[y][x]["temNavio"] === true) {
+        return true
+    } else{
+        return false
+    }
+}
