@@ -70,3 +70,16 @@ h1{
     text-align: center;
     margin-top: 30px;
 }
+
+.acertou{
+    background-color: rgb(12, 247, 12);
+}
+.errou{
+    background-color: lightblue;
+}
+.cell.acertou:hover {
+     background-color: rgb(12, 247, 12); 
+    }
+.cell.errou:hover { 
+    background-color: lightblue; 
+}
