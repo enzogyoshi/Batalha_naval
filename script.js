@@ -46,7 +46,7 @@ tabelaJogo.addEventListener('click', function(event){
         matrizJogo[y][x]["foiAtingido"] = true
         if (verificarNav(x, y)) {
             clicado.classList.add("acertou")
-            console.log(contAfundados())
+            verificarVitoria(contAfundados())
         } else{
             clicado.classList.add("errou")   
         }
@@ -79,4 +79,10 @@ function contAfundados() {
         }
     }
     return contador
+}
+
+function verificarVitoria(contador) {
+    if (contador === navios) {
+        alert("Parabéns você venceu!")
+    }
 }
