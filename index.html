@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batalha naval</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <header>
         <h1>BATALHA NAVAL</h1>
@@ -18,31 +17,21 @@
                 <p>dificuldade: </p>
                 <div>
                     <input type="radio" id="dificil" name="vidas" value="3">
-                    <label for="vidas">dificil: 3 vidas</label>
+                    <label for="dificil">dificil: 3 vidas</label>
                 </div>
                 <div>
                     <input type="radio" id="medio" name="vidas" value="5">
-                    <label for="vidas">medio: 5 vidas</label>
+                    <label for="medio">medio: 5 vidas</label>
                 </div>
                 <div>
-                    <input type="radio" id="facil" name="vidas" value="3">
-                    <label for="vidas">facil: 7 vidas</label>
+                    <input type="radio" id="facil" name="vidas" value="7">
+                    <label for="facil">facil: 7 vidas</label>
                 </div>
             </div>
             <br>
-            <input class="btnstart" type="button" value="start" onclick="startGame()">
+            <input class="btnstart" id="btnstart" type="button" value="start" onclick="startGame()">
         </form>
     </section>
-
-    <section class="jogo">
-        <div class="containerJogo">
-            <p>dificuldade</p><span>vidas</span><br>
-            <div id="board">
-                
-            </div>
-        </div>
-    </section>
-    <script src="script.js"></script>
+    <script src="form.js"></script>
 </body>
-
 </html>

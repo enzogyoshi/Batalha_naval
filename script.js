@@ -1,4 +1,7 @@
-tabelaJogo = document.getElementById("board")
+
+
+let tabelaJogo = document.getElementById("board")
+
 
 for (let linha = 0; linha < 10; linha++) {
     for (let coluna = 0; coluna < 10; coluna++){
