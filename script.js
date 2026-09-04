@@ -1,7 +1,14 @@
-
+let jogador = JSON.parse(localStorage.getItem("jogador"))
+if (!jogador) {
+     window.location.href = "/index.html"
+}
+document.getElementById("nomeJogador").textContent = jogador.nome
+let vidas = parseInt(jogador.dificuldade)
+atualizarVida(vidas)
 
 let tabelaJogo = document.getElementById("board")
 
+let fimJogo = false
 
 for (let linha = 0; linha < 10; linha++) {
     for (let coluna = 0; coluna < 10; coluna++){
@@ -43,7 +50,7 @@ tabelaJogo.addEventListener('click', function(event){
     const x = parseInt(clicado.dataset.x)
     const y = parseInt(clicado.dataset.y)
 
-    if (verificarClic(x, y)){
+    if (verificarClic(x, y ) || fimJogo){
         return
     } else {
         matrizJogo[y][x]["foiAtingido"] = true
@@ -51,7 +58,10 @@ tabelaJogo.addEventListener('click', function(event){
             clicado.classList.add("acertou")
             verificarVitoria(contAfundados())
         } else{
-            clicado.classList.add("errou")   
+            clicado.classList.add("errou")
+            vidas -= 1
+            atualizarVida(vidas)   
+            verificarVidas(vidas)
         }
     }
 })
@@ -86,6 +96,18 @@ function contAfundados() {
 
 function verificarVitoria(contador) {
     if (contador === navios) {
+        fimJogo = true
         alert("Parabéns você venceu!")
     }
+}
+
+function verificarVidas(vidas) {
+    if (vidas === 0) {
+        fimJogo = true
+        alert("Você perdeu")
+    }
+}
+
+function atualizarVida(vidas) {
+    document.getElementById("vidasJogador").textContent = "vidas: " + vidas
 }
