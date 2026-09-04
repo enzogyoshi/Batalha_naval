@@ -1,3 +1,4 @@
+let inicioJogo = Date.now()
 let jogador = JSON.parse(localStorage.getItem("jogador"))
 if (!jogador) {
      window.location.href = "/index.html"
@@ -8,7 +9,7 @@ atualizarVida(vidas)
 
 let tabelaJogo = document.getElementById("board")
 
-let fimJogo = false
+let finalJogo = false
 
 for (let linha = 0; linha < 10; linha++) {
     for (let coluna = 0; coluna < 10; coluna++){
@@ -50,7 +51,7 @@ tabelaJogo.addEventListener('click', function(event){
     const x = parseInt(clicado.dataset.x)
     const y = parseInt(clicado.dataset.y)
 
-    if (verificarClic(x, y ) || fimJogo){
+    if (verificarClic(x, y ) || finalJogo){
         return
     } else {
         matrizJogo[y][x]["foiAtingido"] = true
@@ -96,18 +97,28 @@ function contAfundados() {
 
 function verificarVitoria(contador) {
     if (contador === navios) {
-        fimJogo = true
-        alert("Parabéns você venceu!")
+        fimJogo(true)
+        
     }
 }
 
 function verificarVidas(vidas) {
     if (vidas === 0) {
-        fimJogo = true
-        alert("Você perdeu")
+        fimJogo(false)
     }
 }
 
 function atualizarVida(vidas) {
     document.getElementById("vidasJogador").textContent = "vidas: " + vidas
+}
+
+function fimJogo(resultado) {
+    let tempoJogo = (Date.now() - inicioJogo) / 1000
+        console.log(tempoJogo)
+    if (resultado) {
+        alert("Parabéns você venceu!")
+    } else {
+        alert("Você perdeu")
+    }
+    finalJogo = true
 }
