@@ -70,7 +70,7 @@ tabelaJogo.addEventListener('click', function(event){
         matrizJogo[y][x]["foiAtingido"] = true
         if (verificarNav(x, y)) {
             clicado.classList.add("acertou")
-            verificarVitoria(contAfundados())
+            verificarVitoria(contaNavAfundado(listaNavios))
         } else{
             clicado.classList.add("errou")
             vidas -= 1
@@ -94,18 +94,6 @@ function verificarClic(x, y){
     } else{
         return false
     }
-}
-
-function contAfundados() {
-    let contador = 0
-    for (const linha of matrizJogo) {
-        for (const navio of linha) {
-            if (navio["temNavio"] && navio["foiAtingido"]){
-                contador++
-            }
-        }
-    }
-    return contador
 }
 
 function verificarVitoria(contador) {
@@ -155,7 +143,7 @@ function calcularPosicoesNavio(linhaInicial, colunaInicial, tamanho, orientacao)
 
 function posicaoValida(posicoes) {
     for (let pos of posicoes) {
-        if (matrizJogo[pos.linha][pos.coluna]["temNavio"] === true || pos.linha >= 10 || pos.coluna >= 10){
+        if (pos.linha >= 10 || pos.coluna >= 10 || matrizJogo[pos.linha][pos.coluna]["temNavio"] === true){
             return false
         }
     }
@@ -165,13 +153,16 @@ function posicaoValida(posicoes) {
 function contaNavAfundado(listaNavios) {
     let contadorAfundado = 0
     for (let navio of listaNavios) {
+        let afundou = true
         for (let pedaco of navio) {
-            if (!matrizJogo[pedaco.linha][pedaco.coluna]["foiAtingido"]) {
-                return
+            if (!matrizJogo[pedaco.linha][pedaco.coluna]["foiAtingido"]){
+            afundou = false
             }
-        } if (!matrizJogo[pedaco.linha][pedaco.coluna]["foiAtingido"]){
-            return
         }
-        contadorAfundado++
+        if (afundou){
+            contadorAfundado++
+        } 
+        
     }
+    return contadorAfundado
 }
