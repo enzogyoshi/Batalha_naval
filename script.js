@@ -31,16 +31,29 @@ for (let i = 0; i < 10; i++){
     }
     matrizJogo.push(linhaJogo)
 }
+let listaNavios = []
 let navios = 0
 while (navios < 5) {
-
+    let orientacaoSorteada = ""
     const linhaSorteada = Math.floor(Math.random() * 10)
     const colunaSorteada = Math.floor(Math.random() * 10)
-
-    if (matrizJogo[linhaSorteada][colunaSorteada]["temNavio"] === false){
-        matrizJogo[linhaSorteada][colunaSorteada]["temNavio"] = true
-        navios++
+    if (Math.random() < 0.5) {
+        orientacaoSorteada = "h"
+    } else {
+        orientacaoSorteada = "v"
     }
+    const tamanhoSorteado = Math.floor(Math.random() * (4 - 1) + 1)
+    const listaPos = calcularPosicoesNavio(linhaSorteada, colunaSorteada, tamanhoSorteado, orientacaoSorteada)
+    if(posicaoValida(listaPos)){
+        for (let pos of listaPos) {
+            matrizJogo[pos.linha][pos.coluna]["temNavio"] = true
+        }
+        listaNavios.push(listaPos)
+    } else{
+        continue
+    }
+        navios++
+    
 }
 console.log(matrizJogo)
 
@@ -121,4 +134,44 @@ function fimJogo(resultado) {
         alert("Você perdeu")
     }
     finalJogo = true
+}
+
+function calcularPosicoesNavio(linhaInicial, colunaInicial, tamanho, orientacao) {
+    let posicoes = []
+    if (orientacao === "h"){
+        const colunaFinal = colunaInicial + tamanho - 1
+        for (let i = colunaInicial; i <= colunaFinal; i++){
+            posicoes.push({linha: linhaInicial, coluna: i})
+        }
+    }
+    if (orientacao === "v"){
+    const linhaFinal = linhaInicial + tamanho - 1
+    for (let i = linhaInicial; i <= linhaFinal; i++){
+        posicoes.push({linha: i, coluna: colunaInicial})
+        }
+    }
+    return posicoes
+}
+
+function posicaoValida(posicoes) {
+    for (let pos of posicoes) {
+        if (matrizJogo[pos.linha][pos.coluna]["temNavio"] === true || pos.linha >= 10 || pos.coluna >= 10){
+            return false
+        }
+    }
+    return true
+}
+
+function contaNavAfundado(listaNavios) {
+    let contadorAfundado = 0
+    for (let navio of listaNavios) {
+        for (let pedaco of navio) {
+            if (!matrizJogo[pedaco.linha][pedaco.coluna]["foiAtingido"]) {
+                return
+            }
+        } if (!matrizJogo[pedaco.linha][pedaco.coluna]["foiAtingido"]){
+            return
+        }
+        contadorAfundado++
+    }
 }
