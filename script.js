@@ -2,6 +2,7 @@ let inicioJogo = Date.now()
 let pontuacao = document.getElementById("pontuacao")
 let pontosTotais = 0
 let intervaloTimer = setInterval(exibirTempo, 1000)
+let rankJogador = JSON.parse(localStorage.getItem("rankJogador")) || []
 let jogador = JSON.parse(localStorage.getItem("jogador"))
 if (!jogador) {
      window.location.href = "/index.html"
@@ -13,6 +14,9 @@ atualizarVida(vidas)
 let tabelaJogo = document.getElementById("board")
 
 let finalJogo = false
+
+let btnRetry = document.getElementById("btnTentarNovamente")
+let btnRanking = document.getElementById("btnVerRanking")
 
 for (let linha = 0; linha < 10; linha++) {
     for (let coluna = 0; coluna < 10; coluna++){
@@ -85,6 +89,13 @@ tabelaJogo.addEventListener('click', function(event){
     }
 })
 
+btnRetry.addEventListener('click', function() {
+    window.location.reload()
+})
+btnRanking.addEventListener('click', function() {
+    window.location.href = "/ranking.html"
+})
+
 function verificarNav(x, y) {
     if (matrizJogo[y][x]["temNavio"] === true) {
         return true
@@ -123,13 +134,24 @@ function exibirTempo() {
 }
 
 function fimJogo(resultado) {
-    let tempoJogo = (Date.now() - inicioJogo) / 1000
-    clearInterval(intervaloTimer)       
+    let tempoJogo = Math.floor((Date.now() - inicioJogo) / 1000)
+    clearInterval(intervaloTimer)
+    document.getElementById("cardVitoria").classList.add("visivel")       
     if (resultado) {
-        alert("Parabéns você venceu!")
+        document.getElementById("resultadoFinal").textContent = "Você venceu!"
+        const resultJogador = {
+            nome: jogador.nome,
+            dificuldade: jogador.dificuldade,
+            tempo: tempoJogo,
+            pontos: pontosTotais
+        }
+        rankJogador.push(resultJogador)
+        localStorage.setItem("rankJogador", JSON.stringify(rankJogador))
     } else {
-        alert("Você perdeu")
+        document.getElementById("resultadoFinal").textContent = "Você perdeu!"
     }
+    document.getElementById("resultadoPontos").textContent = "pontuação final: " + pontosTotais
+    document.getElementById("resultadoTempo").textContent = "tempo total: " + tempoJogo + "s"
     finalJogo = true
 }
 
