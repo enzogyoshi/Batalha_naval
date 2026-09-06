@@ -1,6 +1,7 @@
 let inicioJogo = Date.now()
 let pontuacao = document.getElementById("pontuacao")
 let pontosTotais = 0
+let intervaloTimer = setInterval(exibirTempo, 1000)
 let jogador = JSON.parse(localStorage.getItem("jogador"))
 if (!jogador) {
      window.location.href = "/index.html"
@@ -73,7 +74,7 @@ tabelaJogo.addEventListener('click', function(event){
         if (verificarNav(x, y)) {
             clicado.classList.add("acertou")
             pontosTotais += verificarNavAfundado(encontrarNav(x, y))
-            pontuacao.textContent = "pontos: " + pontosTotais
+            pontuacao.textContent = "PONTOS: " + pontosTotais
             verificarVitoria(contaNavAfundado(listaNavios))
         } else{
             clicado.classList.add("errou")
@@ -114,12 +115,16 @@ function verificarVidas(vidas) {
 }
 
 function atualizarVida(vidas) {
-    document.getElementById("vidasJogador").textContent = "vidas: " + vidas
+    document.getElementById("vidasJogador").textContent = "VIDAS: " + vidas
+}
+
+function exibirTempo() {
+    return document.getElementById("timer").textContent = "TEMPO: " + Math.floor((Date.now() - inicioJogo) / 1000) + "s"
 }
 
 function fimJogo(resultado) {
     let tempoJogo = (Date.now() - inicioJogo) / 1000
-        console.log(tempoJogo)
+    clearInterval(intervaloTimer)       
     if (resultado) {
         alert("Parabéns você venceu!")
     } else {

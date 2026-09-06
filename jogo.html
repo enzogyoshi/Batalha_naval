@@ -13,14 +13,23 @@
     </header>
     <section class="jogo">
         <div class="containerJogo">
-            <p id="nomeJogador">nome</p><br> 
-            <span id="vidasJogador">vidas: </span><span id="pontuacao">pontos: 0</span><br>
+            <p id="timer">TEMPO: 0s</p>
+            <h2 id="nomeJogador">NOME</h2><br> 
+            <span id="vidasJogador">VIDAS: </span><span id="pontuacao">PONTOS: 0</span><br>
             <div id="board">
                 
             </div>
         </div>
     </section>
-    
+    <div id="cardVitoria" class="modal">
+        <div class="modal-conteudo">
+            <h2 id="resultadoFinal">resultado</h2>
+            <p id="resultadoPontos"></p>
+            <p id="resultadoTempo"></p>
+            <button id="btnTentarNovamente">Tentar novamente</button>
+            <button id="btnVerRanking">Ver ranking</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 
