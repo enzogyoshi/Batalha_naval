@@ -135,3 +135,23 @@ h1{
  #btnTentarNovamente:hover{
     background-color: rgb(88, 0, 0);
  }
+ #tabelaRanking {
+    border-collapse: collapse;
+    margin: 0 auto;
+    width: 60%;
+    border-radius: ;
+}
+
+#tabelaRanking th, #tabelaRanking td {
+    padding: 1%;
+    border: 1px solid black;
+    text-align: right;
+}
+
+#tabelaRanking th {
+    background-color: rgb(106, 27, 27);
+    color: white;
+}
+#tabelaRanking td {
+    background-color: white;
+}
