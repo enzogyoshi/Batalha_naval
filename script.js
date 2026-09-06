@@ -17,6 +17,11 @@ let finalJogo = false
 
 let btnRetry = document.getElementById("btnTentarNovamente")
 let btnRanking = document.getElementById("btnVerRanking")
+let btnInicio = document.getElementById("btnInicio")
+
+btnInicio.addEventListener("click", function(){
+    window.location.href = "/index.html"
+})
 
 for (let linha = 0; linha < 10; linha++) {
     for (let coluna = 0; coluna < 10; coluna++){
@@ -172,13 +177,34 @@ function calcularPosicoesNavio(linhaInicial, colunaInicial, tamanho, orientacao)
     return posicoes
 }
 
-function posicaoValida(posicoes) {
-    for (let pos of posicoes) {
-        if (pos.linha >= 10 || pos.coluna >= 10 || matrizJogo[pos.linha][pos.coluna]["temNavio"] === true){
-            return false
+function verificarVizinhos(x, y) {
+    let vizinhos = []
+    for (let deltalinha = -1; deltalinha <= 1; deltalinha++) {
+        for (let deltacoluna = -1; deltacoluna <= 1; deltacoluna++) {
+            if (!(deltalinha === 0 && deltacoluna === 0)) {
+                vizinhos.push({linha: deltalinha + x, coluna: deltacoluna + y})
+            }
         }
     }
-    return true
+    return vizinhos
+}
+
+    function posicaoValida(posicoes) {
+        for (let pos of posicoes) {
+            const vizinhoPos = verificarVizinhos(pos.linha, pos.coluna)
+            for (const posVizinha of vizinhoPos) {
+                if (!(posVizinha.linha > -1 && posVizinha.linha < 10 && posVizinha.coluna < 10 && posVizinha.coluna > -1)) {
+                    continue
+                }
+                if (matrizJogo[posVizinha.linha][posVizinha.coluna]["temNavio"] === true) {
+                    return false
+                }
+            }
+            if (pos.linha >= 10 || pos.coluna >= 10 || matrizJogo[pos.linha][pos.coluna]["temNavio"] === true){
+                return false
+            }
+        }
+        return true
 }
 
 function contaNavAfundado(listaNavios) {

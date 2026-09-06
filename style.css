@@ -139,7 +139,6 @@ h1{
     border-collapse: collapse;
     margin: 0 auto;
     width: 60%;
-    border-radius: ;
 }
 
 #tabelaRanking th, #tabelaRanking td {
@@ -154,4 +153,14 @@ h1{
 }
 #tabelaRanking td {
     background-color: white;
+}
+#btnInicio{
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 1%;
+    border-radius: 8px;
+}
+#btnInicio:hover{
+    background-color: rgb(124, 0, 0);
 }

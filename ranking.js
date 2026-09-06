@@ -3,6 +3,11 @@ if (ranking.length === 0) {
     alert("ainda não tem nenhum jogador no ranking")
     window.location.href = "/index.html"
 }
+let btnInicio = document.getElementById("btnInicio")
+
+btnInicio.addEventListener("click", function(){
+    window.location.href = "/index.html"
+})
 let listaRanking = document.getElementById("corpoRanking")
 ranking.sort((a, b) => b.pontos - a.pontos)
 for (const jogador of ranking) {
