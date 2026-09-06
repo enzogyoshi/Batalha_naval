@@ -234,10 +234,10 @@ function encontrarNav(x, y) {
 }
 
 function verificarNavAfundado(navio){
-    let navAfundado = null
+    let navAfundado = true
     for (const pedaco of navio){
         if (matrizJogo[pedaco.linha][pedaco.coluna]["foiAtingido"] === true) {
-            navAfundado = true
+            continue
         } else{
             navAfundado = false
         }
