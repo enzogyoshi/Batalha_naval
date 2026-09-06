@@ -1,4 +1,6 @@
 let inicioJogo = Date.now()
+let pontuacao = document.getElementById("pontuacao")
+let pontosTotais = 0
 let jogador = JSON.parse(localStorage.getItem("jogador"))
 if (!jogador) {
      window.location.href = "/index.html"
@@ -70,6 +72,8 @@ tabelaJogo.addEventListener('click', function(event){
         matrizJogo[y][x]["foiAtingido"] = true
         if (verificarNav(x, y)) {
             clicado.classList.add("acertou")
+            pontosTotais += verificarNavAfundado(encontrarNav(x, y))
+            pontuacao.textContent = "pontos: " + pontosTotais
             verificarVitoria(contaNavAfundado(listaNavios))
         } else{
             clicado.classList.add("errou")
@@ -165,4 +169,34 @@ function contaNavAfundado(listaNavios) {
         
     }
     return contadorAfundado
+}
+
+function encontrarNav(x, y) {
+    for (const navio of listaNavios){
+        for (const pedaco of navio) {
+            if (x === pedaco.coluna && y === pedaco.linha)
+                return navio
+        }   
+    }
+}
+
+function verificarNavAfundado(navio){
+    let navAfundado = null
+    for (const pedaco of navio){
+        if (matrizJogo[pedaco.linha][pedaco.coluna]["foiAtingido"] === true) {
+            navAfundado = true
+        } else{
+            navAfundado = false
+        }
+    }
+    if (navAfundado){
+        return contarPontuacao(navio)
+    } else {
+        return 0
+    }
+}
+
+function contarPontuacao(navio) {
+    const tamanhoNav = navio.length
+    return tamanhoNav * 5
 }
